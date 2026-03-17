@@ -1,0 +1,109 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* HERO HEADER */
+.hero {
+    background: url("https://wallpaperaccess.com/full/381403.jpg") center/cover no-repeat;
+    height: 320px;
+    position: relative;
+}
+
+.overlay {
+    background: rgba(0,0,0,0.5);
+    height: 100%;
+    color: white;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.overlay h1 {
+    font-size: 40px;
+}
+
+/* NAVBAR */
+nav {
+    background: #1b5e20;
+}
+
+.menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.menu a:hover {
+    background: #2e7d32;
+}
+
+/* DROPDOWN */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #2e7d32;
+    min-width: 200px;
+    z-index: 1;
+}
+
+.dropdown-content li a {
+    padding: 12px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* CONTENT */
+.content {
+    padding: 30px;
+    background: #f1f8f4;
+}
+
+/* FOOTER */
+footer {
+    background: #1b5e20;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+.highlight {
+    padding: 30px;
+    background: #eef5ee;
+    text-align: center;
+}
+
+.highlight .card {
+    display: inline-block;
+    width: 280px;
+    background: white;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.highlight img {
+    width: 100%;
+    height: 170px;
+    border-radius: 8px;
+}
+/* LOGIN DROPDOWN – PROFESSIONAL STYLE */
+.login-menu > a {
+    background: #0d3b1e;
+    font-weight: bold;
+    border-left: 1px solid rgba(255,255,255,0.3);
+}
+
+

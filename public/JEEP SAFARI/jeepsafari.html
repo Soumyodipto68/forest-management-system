@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <ul class="menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="animals.html">Animals</a></li>
+        <li><a href="safari.html">Safari Booking</a></li>
+        <li><a href="login.html">Login</a></li>
+    </ul>
+</nav>
+
+<!-- HEADER -->
+<header class="page-header">
+    <h1>Official Jeep Safari Booking – India</h1>
+    <p>Explore Indian National Parks through regulated Forest Department safaris</p>
+</header>
+
+<!-- ABOUT SAFARI -->
+<section class="content">
+    <h2>About Jeep Safari in India</h2>
+    <p>
+        Jeep Safari is the most widely used and government-approved method of
+        wildlife tourism in India. Conducted inside National Parks and Tiger Reserves,
+        these safaris operate under strict guidelines issued by State Forest
+        Departments and the Ministry of Environment, Forest and Climate Change.
+    </p>
+    <p>
+        Safaris are conducted in open 4x4 vehicles accompanied by trained drivers
+        and government-authorized naturalist guides.
+    </p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="content">
+    <h2>How Safari Booking Works</h2>
+    <ol>
+        <li>Select a National Park / Tiger Reserve</li>
+        <li>Choose safari date and time slot</li>
+        <li>Submit visitor details</li>
+        <li>Forest Department verifies booking</li>
+        <li>Safari permit issued (subject to availability)</li>
+    </ol>
+</section>
+
+<!-- FOREST 1 -->
+<section class="forest-section">
+    <h2>🐅 Jim Corbett National Park (Uttarakhand)</h2>
+
+    <div class="forest-grid">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Calm_and_Clear.jpg/1280px-Calm_and_Clear.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Tuskercorbett.jpg/1280px-Tuskercorbett.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/03/%285%29_Pallas%27s_Fish_Eagle_at_Corbett_National_park%2C_Uttarakhand_India_March_2013.jpg">
+    </div>
+
+    <p>
+        Jim Corbett National Park is India’s oldest national park and the first
+        Tiger Reserve under Project Tiger. It is famous for Bengal Tigers,
+        elephants, and rich birdlife.
+    </p>
+
+    <ul>
+        <li><strong>Safari Zones:</strong> Dhikala, Bijrani, Jhirna, Dhela</li>
+        <li><strong>Best Time:</strong> November – June</li>
+        <li><strong>Safari Type:</strong> Jeep Safari</li>
+    </ul>
+</section>
+
+<!-- FOREST 2 -->
+<section class="forest-section">
+    <h2>🐯 Ranthambore National Park (Rajasthan)</h2>
+
+    <div class="forest-grid">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Get_Together.jpg/960px-Get_Together.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7f/Ranthambore_National_Park.JPG/1280px-Ranthambore_National_Park.JPG">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Tiger_from_Ranthanbore_Sawai_Madhopur_Rajasthan_India_12.10.2014.jpg">
+    </div>
+
+    <p>
+        Ranthambore is one of the most popular tiger reserves in India, known
+        for its open landscapes and frequent tiger sightings. The park is also
+        home to the historic Ranthambore Fort.
+    </p>
+
+    <ul>
+        <li><strong>Safari Zones:</strong> Zone 1 to Zone 10</li>
+        <li><strong>Best Time:</strong> October – June</li>
+        <li><strong>Safari Type:</strong> Jeep Safari</li>
+    </ul>
+</section>
+
+<!-- FOREST 3 -->
+<section class="forest-section">
+    <h2>🦏 Kaziranga National Park (Assam)</h2>
+
+    <div class="forest-grid">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Asiatic_buffalo.jpg/1280px-Asiatic_buffalo.jpg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Beauty_of_Kaziranga_National_Park.jpg/1280px-Beauty_of_Kaziranga_National_Park.jpg">
+        <img src="https://www.kaziranganationalpark-india.com/blog/wp-content/uploads/2022/01/kaziranga-deer.jpg">
+    </div>
+
+    <p>
+        Kaziranga National Park is a UNESCO World Heritage Site and home to
+        two-thirds of the world’s one-horned rhinoceros population.
+    </p>
+
+    <ul>
+        <li><strong>Safari Zones:</strong> Central, Western, Eastern</li>
+        <li><strong>Best Time:</strong> November – April</li>
+        <li><strong>Safari Type:</strong> Jeep Safari</li>
+    </ul>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="content">
+    <h2>Book Your Jeep Safari</h2>
+
+    <form action="/book-safari" method="post">
+        <input type="text" name="name" placeholder="Full Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+
+        <select name="park" required>
+            <option value="">Select National Park</option>
+            <option>Jim Corbett National Park</option>
+            <option>Ranthambore National Park</option>
+            <option>Kaziranga National Park</option>
+        </select>
+
+        <select name="slot" required>
+            <option value="">Safari Slot</option>
+            <option>Morning Safari</option>
+            <option>Evening Safari</option>
+        </select>
+
+        <input type="date" name="date" required>
+
+        <button type="submit">Submit Booking Request</button>
+    </form>
+</section>
+
+<!-- RULES -->
+<section class="content">
+    <h2>Safari Rules & Guidelines</h2>
+    <ul>
+        <li>No feeding or disturbing animals</li>
+        <li>Maintain silence during safari</li>
+        <li>Plastic-free forest zones</li>
+        <li>Follow guide and forest staff instructions</li>
+    </ul>
+</section>
+
+<footer>
+    <p>© Indian Forest & Wildlife Safari Portal</p>
+</footer>
+
+</body>
+</html>

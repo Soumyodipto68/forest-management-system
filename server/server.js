@@ -7,7 +7,7 @@ import User from "./models/user.models.js"
 
 // Import routes
 import authRoutes from "./routes/auth.routes.js";
-//import biosphereRoutes from "./routes/biosphereRoutes.js";
+import biosphereRoutes from "./routes/biosphere.routes.js";
 //import newsRoutes from "./routes/newsRoutes.js";
 //import safariRoutes from "./routes/safariRoutes.js";
 //import parkRoutes from "./routes/parkRoutes.js";
@@ -21,7 +21,7 @@ app.use(cors());
 
 // Routes
 app.use("/api/auth", authRoutes);
-//app.use("/api/biosphere", biosphereRoutes);
+app.use("/api/biosphere", biosphereRoutes);
 //app.use("/api/news", newsRoutes);
 //app.use("/api/safari", safariRoutes);
 //app.use("/api/parks", parkRoutes);

@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/user.models.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
@@ -8,8 +8,7 @@ export const signup = async (req, res) => {
   try {
     const { name, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ name, email, password: hashedPassword, role });
-    await user.save();
+    const user = await User.create({ name, email, password: hashedPassword, role });
     res.json({ message: "Signup successful" });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -20,7 +19,7 @@ export const signup = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ where: { email } });
     if (!user) return res.status(400).json({ error: "User not found" });
 
     const isMatch = await bcrypt.compare(password, user.password);
@@ -29,7 +28,7 @@ export const login = async (req, res) => {
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     user.otp = otp;
-    user.otpExpiry = Date.now() + 5 * 60 * 1000; // 5 minutes
+    user.otpExpiry = new Date(Date.now() + 5 * 60 * 1000);
     await user.save();
 
     // Send OTP via email
@@ -54,8 +53,8 @@ export const login = async (req, res) => {
 export const verifyOtp = async (req, res) => {
   try {
     const { email, otp } = req.body;
-    const user = await User.findOne({ email });
-    if (!user || user.otp !== otp || Date.now() > user.otpExpiry) {
+    const user = await User.findOne({ where: { email } });
+    if (!user || user.otp !== otp || new Date() > user.otpExpiry) {
       return res.status(400).json({ error: "Invalid or expired OTP" });
     }
 
@@ -64,7 +63,7 @@ export const verifyOtp = async (req, res) => {
     await user.save();
 
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      { id: user.id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );

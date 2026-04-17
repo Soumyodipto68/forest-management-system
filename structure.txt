@@ -1,4 +1,4 @@
-frontend/
+public/
 │── landing/
 │   ├── index.html
 │   ├── style.css

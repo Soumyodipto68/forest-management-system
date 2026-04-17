@@ -30,16 +30,16 @@ app.use("/api/biosphere", biosphereRoutes);
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("✅ MySQL connected");
+    console.log("MySQL connected");
 
     // Sync all models (creates/updates tables)
     await sequelize.sync({ alter: true });
-    console.log("✅ Models synchronized");
+    console.log("Models synchronized");
 
     // Start server
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (error) {
-    console.error("❌ Database connection failed:", error);
+    console.error("Database connection failed:", error);
   }
 })();

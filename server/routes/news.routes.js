@@ -5,7 +5,7 @@ import {
   getSingleNews,
   updateNews,
   deleteNews
-} from "../controllers/newsController.js";
+} from "../controllers/news.controllers.js";
 import { verifyToken } from "../middleware/auth.middleware.js";
 
 const router = Router();

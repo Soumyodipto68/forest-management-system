@@ -5,7 +5,7 @@ import {
   getSafari,
   updateSafari,
   deleteSafari
-} from "../controllers/safariController.js";
+} from "../controllers/safari.controllers.js";
 import { verifyToken } from "../middleware/auth.middleware.js";
 
 const router = Router();

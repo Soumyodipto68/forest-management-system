@@ -9,7 +9,7 @@ import {
 import { verifyToken } from "../middleware/auth.middleware.js";
 const router = Router();
 
-r// Public routes
+// Public routes
 router.get("/", getBiospheres);
 router.get("/:id", getBiosphere);
 

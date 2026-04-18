@@ -6,7 +6,7 @@ import {
   updatePark,
   deletePark
 } from "../controllers/parkController.js";
-import { verifyToken } from "../middleware/authMiddleware.js";
+import { verifyToken } from "../middleware/auth.middleware.js";
 
 const router = Router();
 

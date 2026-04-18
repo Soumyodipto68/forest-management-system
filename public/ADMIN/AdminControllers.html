@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./AdminControllers.css">
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+
+  <!-- Biosphere Section -->
+  <section>
+    <h2>Biosphere Reserves</h2>
+    <form id="biosphere-form">
+      <input type="text" id="bio-name" placeholder="Name" required>
+      <input type="text" id="bio-location" placeholder="Location">
+      <input type="number" id="bio-area" placeholder="Area (sq km)">
+      <textarea id="bio-description" placeholder="Description"></textarea>
+      <button type="submit">Add Biosphere</button>
+    </form>
+    <ul id="biosphere-list"></ul>
+  </section>
+
+  <!-- News Section -->
+  <section>
+    <h2>Wildlife News</h2>
+    <form id="news-form">
+      <input type="text" id="news-title" placeholder="Title" required>
+      <textarea id="news-content" placeholder="Content"></textarea>
+      <button type="submit">Add News</button>
+    </form>
+    <ul id="news-list"></ul>
+  </section>
+
+  <!-- Safari Section -->
+  <section>
+    <h2>Safaris</h2>
+    <form id="safari-form">
+      <input type="text" id="safari-name" placeholder="Safari Name" required>
+      <input type="text" id="safari-location" placeholder="Location">
+      <textarea id="safari-description" placeholder="Description"></textarea>
+      <button type="submit">Add Safari</button>
+    </form>
+    <ul id="safari-list"></ul>
+  </section>
+
+  <!-- Parks Section -->
+  <section>
+    <h2>Parks</h2>
+    <form id="park-form">
+      <input type="text" id="park-name" placeholder="Park Name" required>
+      <input type="text" id="park-location" placeholder="Location">
+      <textarea id="park-description" placeholder="Description"></textarea>
+      <button type="submit">Add Park</button>
+    </form>
+    <ul id="park-list"></ul>
+  </section>
+
+  <!-- Animal Census Section -->
+  <section>
+    <h2>Animal Census</h2>
+    <form id="census-form">
+      <input type="text" id="census-animal" placeholder="Animal Name" required>
+      <input type="number" id="census-count" placeholder="Count" required>
+      <button type="submit">Add Census Record</button>
+    </form>
+    <ul id="census-list"></ul>
+  </section>
+
+  <script src="./admin.js"></script>
+</body>
+</html>

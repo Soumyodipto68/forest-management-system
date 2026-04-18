@@ -6,13 +6,16 @@ import {
   updateBiosphere,
   deleteBiosphere
 } from "../controllers/biosphere.controllers.js";
-
+import { verifyToken } from "../middleware/auth.middleware.js";
 const router = Router();
 
-router.post("/", createBiosphere);
+r// Public routes
 router.get("/", getBiospheres);
 router.get("/:id", getBiosphere);
-router.put("/:id", updateBiosphere);
-router.delete("/:id", deleteBiosphere);
+
+// Protected routes
+router.post("/", verifyToken, createBiosphere);
+router.put("/:id", verifyToken, updateBiosphere);
+router.delete("/:id", verifyToken, deleteBiosphere);
 
 export default router;

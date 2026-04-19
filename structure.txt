@@ -1,33 +1,34 @@
 public/
-│── landing/
+│── HOME/
 │   ├── index.html
 │   ├── style.css
 │   ├── script.js
-│── login/
+│── LOGIN/
 │   ├── login.html
 │   ├── style.css
 │   ├── script.js
-│── signup/
+│── SIGNUP/
 │   ├── signup.html
 │   ├── style.css
 │   ├── script.js
-│── biosphere/
+│── BIOSPHERE/
 │   ├── biosphere.html
 │   ├── style.css
 │   ├── script.js
-│── news/
+│── NEWS/
 │   ├── news.html
 │   ├── style.css
 │   ├── script.js
-│── safari/
+│── JEEP SAFARI/
 │   ├── safari.html
 │   ├── style.css
 │   ├── script.js
-│── parks/
+│── NATIONAL PARK/
 │   ├── parks.html
 │   ├── style.css
 │   ├── script.js
-│── census/
+│── CENSUS/
 │   ├── census.html
 │   ├── style.css
 │   ├── script.js
+

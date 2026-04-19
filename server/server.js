@@ -27,7 +27,9 @@ app.use("/api/news", newsRoutes);
 app.use("/api/safari", safariRoutes);
 app.use("/api/parks", parkRoutes);
 app.use("/api/census", censusRoutes);
-
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/HOME/index.html"));
+});
 (async () => {
   try {
     await sequelize.authenticate();

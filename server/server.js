@@ -4,6 +4,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import sequelize from "./db.js";
 import User from "./models/user.models.js"
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Import routes
 import authRoutes from "./routes/auth.routes.js";
@@ -18,7 +23,7 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "../public")));
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -28,8 +33,9 @@ app.use("/api/safari", safariRoutes);
 app.use("/api/parks", parkRoutes);
 app.use("/api/census", censusRoutes);
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/HOME/index.html"));
+  res.sendFile(path.join(__dirname, "../public/index.html"));
 });
+
 (async () => {
   try {
     await sequelize.authenticate();

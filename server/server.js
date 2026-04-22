@@ -3,14 +3,15 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import sequelize from "./db.js";
-import User from "./models/user.models.js"
+import User from "./models/user.models.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Import routes
+// Import API routes
 import authRoutes from "./routes/auth.routes.js";
 import biosphereRoutes from "./routes/biosphere.routes.js";
 import newsRoutes from "./routes/news.routes.js";
@@ -23,30 +24,73 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Serve static files from public/
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Routes
+// ---------------- API ROUTES ----------------
 app.use("/api/auth", authRoutes);
 app.use("/api/biosphere", biosphereRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/safari", safariRoutes);
 app.use("/api/parks", parkRoutes);
 app.use("/api/census", censusRoutes);
+
+// ---------------- PAGE ROUTES ----------------
+// Home
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
+// User pages
+app.get("/login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/login.html"));
+});
+
+app.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/signup.html"));
+});
+
+// Content pages
+app.get("/biosphere", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/biosphere.html"));
+});
+
+app.get("/news", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/news.html"));
+});
+
+app.get("/safari", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/safari.html"));
+});
+
+app.get("/parks", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/parks.html"));
+});
+
+app.get("/census", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/census.html"));
+});
+
+// Admin pages
+app.get("/admin-dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/admin-dashboard.html"));
+});
+
+app.get("/admin-update", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/admin-update.html"));
+});
+
+// ---------------- DATABASE + SERVER ----------------
 (async () => {
   try {
     await sequelize.authenticate();
     console.log("MySQL connected");
 
-    // Sync all models (creates/updates tables)
     await sequelize.sync({ alter: true });
     console.log("Models synchronized");
 
-    // Start server
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 8383; // use 8383 since that's your port
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (error) {
     console.error("Database connection failed:", error);

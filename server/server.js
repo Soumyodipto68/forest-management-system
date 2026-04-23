@@ -2,8 +2,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import sequelize from "./db.js";
-import User from "./models/user.models.js";
+import sequelize from "./db.js"; // DB connection
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -25,7 +24,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Serve static files from public/
+// ---------------- STATIC FILES ----------------
+// Serve everything inside public/ (HTML, CSS, JS, images)
 app.use(express.static(path.join(__dirname, "../public")));
 
 // ---------------- API ROUTES ----------------
@@ -68,8 +68,8 @@ app.get("/parks", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/parks.html"));
 });
 
-app.get("/census", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/census.html"));
+app.get("/animalcensus", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/animalcensus.html"));
 });
 
 // Admin pages
@@ -85,14 +85,14 @@ app.get("/admin-update", (req, res) => {
 (async () => {
   try {
     await sequelize.authenticate();
-    console.log("MySQL connected");
+    console.log(" MySQL connected");
 
     await sequelize.sync({ alter: true });
-    console.log("Models synchronized");
+    console.log(" Models synchronized");
 
-    const PORT = process.env.PORT || 8383; // use 8383 since that's your port
+    const PORT = process.env.PORT || 8383; // use your chosen port
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   } catch (error) {
-    console.error("Database connection failed:", error);
+    console.error(" Database connection failed:", error);
   }
 })();

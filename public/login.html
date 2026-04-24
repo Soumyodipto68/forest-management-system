@@ -10,16 +10,21 @@
     <h2>🌲 Indian Forest and Wildlife Management </h2>
     <h3>User Login</h3>
 
-    <input type="email" id="loginEmail" placeholder="Enter Registered Gmail">
-    <button onclick="sendOTP()">Generate OTP</button>
+<input type="email" id="loginEmail" placeholder="Enter Registered Gmail" required>
+<input type="password" id="loginPassword" placeholder="Enter Password">
+<button onclick="passwordLogin()">Login with Password</button>
 
-    <input type="text" id="loginOTP" placeholder="Enter OTP">
-    <button onclick="verifyOTP()">Login</button>
+<hr>
+
+<button onclick="sendOTP()">Generate OTP</button>
+<input type="text" id="loginOTP" placeholder="Enter OTP">
+<button onclick="verifyOTP()">Login with OTP</button>
+
 
     <p id="msg"></p>
     <a href="/signup">New User? Sign Up</a>
 </div>
 
-<script src="./script.js"></script>
+<script src="./js/script.js"></script>
 </body>
 </html>

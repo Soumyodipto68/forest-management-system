@@ -91,7 +91,7 @@ app.get("/admin-update", (req, res) => {
     console.log(" Models synchronized");
 
     const PORT = process.env.PORT || 8383; // use your chosen port
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
   } catch (error) {
     console.error(" Database connection failed:", error);
   }

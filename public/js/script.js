@@ -101,7 +101,32 @@ async function passwordLogin() {
     if (data.success) {
       // Store JWT if needed
       localStorage.setItem("token", data.token);
-      window.location.href = "/landing";
+      window.location.href = "/";
+    } else {
+      document.getElementById("msg").innerText = data.message;
+    }
+  } catch (err) {
+    document.getElementById("msg").innerText = "Login failed.";
+  }
+}
+
+async function startLogin() {
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  try {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      document.getElementById("msg").innerText = "Password verified. OTP sent to email.";
+      document.getElementById("loginOTP").style.display = "block";
+      document.getElementById("otpBtn").style.display = "block";
     } else {
       document.getElementById("msg").innerText = data.message;
     }

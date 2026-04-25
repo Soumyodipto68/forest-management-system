@@ -11,20 +11,17 @@
     <h3>User Login</h3>
 
 <input type="email" id="loginEmail" placeholder="Enter Registered Gmail" required>
-<input type="password" id="loginPassword" placeholder="Enter Password">
-<button onclick="passwordLogin()">Login with Password</button>
+<input type="password" id="loginPassword" placeholder="Enter Password" required>
+<button onclick="startLogin()">Login</button>
 
-<hr>
+<input type="text" id="loginOTP" placeholder="Enter OTP" style="display:none;">
+<button id="otpBtn" onclick="verifyOTP()" style="display:none;">Verify OTP</button>
 
-<button onclick="sendOTP()">Generate OTP</button>
-<input type="text" id="loginOTP" placeholder="Enter OTP">
-<button onclick="verifyOTP()">Login with OTP</button>
+<p id="msg"></p>
 
-
-    <p id="msg"></p>
     <a href="/signup">New User? Sign Up</a>
 </div>
 
-<script src="./js/script.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>

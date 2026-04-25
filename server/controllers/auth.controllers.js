@@ -8,40 +8,35 @@ export const signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    // Validate input
     if (!email || !password) {
       return res.status(400).json({ success: false, message: "Email and password required" });
     }
 
-    // Check if user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
       return res.status(400).json({ success: false, message: "User already exists" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     const user = await User.create({
       name,
       email,
       password: hashedPassword,
-      role: "viewer" // default role
+      role: "viewer"
     });
 
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     user.otp = otp;
-    user.otpExpiry = Date.now() + 10 * 60 * 1000; // matches model
+    user.otpExpiry = Date.now() + 10 * 60 * 1000; // 10 minutes
     await user.save();
 
-    // Send OTP via email
-   try {
-     await sendOtpEmail(email, otp);
+    try {
+      await sendOtpEmail(email, otp);
     } catch (err) {
-  console.error("OTP email failed:", err);
-  }
+      console.error("OTP email failed:", err);
+    }
 
     return res.json({ success: true, message: "Signup successful. Verify OTP sent to email." });
   } catch (err) {
@@ -49,8 +44,7 @@ export const signup = async (req, res) => {
   }
 };
 
-
-// ---------------- LOGIN ----------------
+// ---------------- LOGIN (Step 1: Password) ----------------
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -61,39 +55,21 @@ export const login = async (req, res) => {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(400).json({ success: false, message: "Invalid credentials" });
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    res.json({ success: true, message: "Login successful", token });
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
-};
-
-// ---------------- SEND OTP ----------------
-export const sendOtp = async (req, res) => {
-  try {
-    const { email } = req.body;
-    const user = await User.findOne({ where: { email } });
-    if (!user) return res.status(400).json({ success: false, message: "User not found" });
-
+    // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     user.otp = otp;
-    user.otpExpires = Date.now() + 10 * 60 * 1000;
+    user.otpExpiry = Date.now() + 10 * 60 * 1000;
     await user.save();
 
     await sendOtpEmail(email, otp);
 
-    res.json({ success: true, message: "OTP sent to email" });
+    return res.json({ success: true, message: "Password verified. OTP sent to email." });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
 };
 
-// ---------------- VERIFY OTP ----------------
+// ---------------- VERIFY OTP (Step 2) ----------------
 export const verifyOtp = async (req, res) => {
   try {
     const { email, otp } = req.body;
@@ -101,15 +77,21 @@ export const verifyOtp = async (req, res) => {
     const user = await User.findOne({ where: { email } });
     if (!user) return res.status(400).json({ success: false, message: "User not found" });
 
-    if (user.otp !== otp || Date.now() > user.otpExpires) {
+    if (user.otp !== otp || Date.now() > user.otpExpiry) {
       return res.status(400).json({ success: false, message: "Invalid or expired OTP" });
     }
 
     user.otp = null;
-    user.otpExpires = null;
+    user.otpExpiry = null;
     await user.save();
 
-    res.json({ success: true, message: "OTP verified successfully" });
+    const token = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
+    return res.json({ success: true, message: "Login successful", token });
   } catch (err) {
     res.status(500).json({ success: false, message: err.message });
   }
@@ -120,7 +102,6 @@ export const adminLogin = async (req, res) => {
   try {
     const { user, pass } = req.body;
 
-    // Example: check against env variables
     if (user === process.env.ADMIN_USER && pass === process.env.ADMIN_PASS) {
       return res.json({ success: true, message: "Admin login successful" });
     }

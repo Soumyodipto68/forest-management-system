@@ -18,6 +18,9 @@ import safariRoutes from "./routes/safari.routes.js";
 import parkRoutes from "./routes/park.routes.js";
 import censusRoutes from "./routes/census.routes.js";
 
+// Import admin middleware
+import isAdmin from "./middleware/admin.middleware.js";
+
 dotenv.config();
 
 const app = express();
@@ -42,9 +45,13 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-// User pages
+// Authentication pages
 app.get("/login", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/login.html"));
+});
+
+app.get("/admin-login", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/Adminlogin.html"));
 });
 
 app.get("/signup", (req, res) => {
@@ -60,12 +67,12 @@ app.get("/news", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/news.html"));
 });
 
-app.get("/safari", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/safari.html"));
+app.get("/jeepsafari", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/jeepsafari.html"));
 });
 
 app.get("/parks", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/parks.html"));
+  res.sendFile(path.join(__dirname, "../public/nationalPark.html"));
 });
 
 app.get("/animalcensus", (req, res) => {
@@ -73,11 +80,11 @@ app.get("/animalcensus", (req, res) => {
 });
 
 // Admin pages
-app.get("/admin-dashboard", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/admin-dashboard.html"));
+app.get("/admin-dashboard", isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/AdminDashboard.html"));
 });
 
-app.get("/admin-update", (req, res) => {
+app.get("/admin-update", isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/admin-update.html"));
 });
 
@@ -87,7 +94,7 @@ app.get("/admin-update", (req, res) => {
     await sequelize.authenticate();
     console.log(" MySQL connected");
 
-    await sequelize.sync({ alter: true });
+    await sequelize.sync({ force: true });
     console.log(" Models synchronized");
 
     const PORT = process.env.PORT || 8383; // use your chosen port

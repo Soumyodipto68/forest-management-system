@@ -94,7 +94,7 @@ app.get("/admin-update", isAdmin, (req, res) => {
     await sequelize.authenticate();
     console.log(" MySQL connected");
 
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ alter: true });
     console.log(" Models synchronized");
 
     const PORT = process.env.PORT || 8383; // use your chosen port

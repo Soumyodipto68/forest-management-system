@@ -28,9 +28,9 @@ export const signup = async (req, res) => {
 
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    user.otp = otp;
-    user.otpExpiry = Date.now() + 10 * 60 * 1000; // 10 minutes
-    await user.save();
+    const expiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes
+
+    await user.update({ otp, otpExpiry: expiry });
 
     try {
       await sendOtpEmail(email, otp);
@@ -57,11 +57,15 @@ export const login = async (req, res) => {
 
     // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-    user.otp = otp;
-    user.otpExpiry = Date.now() + 10 * 60 * 1000;
-    await user.save();
+    const expiry = new Date(Date.now() + 10 * 60 * 1000);
 
-    await sendOtpEmail(email, otp);
+    await user.update({ otp, otpExpiry: expiry });
+
+    try {
+      await sendOtpEmail(email, otp);
+    } catch (err) {
+      console.error("OTP email failed:", err);
+    }
 
     return res.json({ success: true, message: "Password verified. OTP sent to email." });
   } catch (err) {
@@ -77,13 +81,11 @@ export const verifyOtp = async (req, res) => {
     const user = await User.findOne({ where: { email } });
     if (!user) return res.status(400).json({ success: false, message: "User not found" });
 
-    if (user.otp !== otp || Date.now() > user.otpExpiry) {
+    if (user.otp !== otp || Date.now() > new Date(user.otpExpiry).getTime()) {
       return res.status(400).json({ success: false, message: "Invalid or expired OTP" });
     }
 
-    user.otp = null;
-    user.otpExpiry = null;
-    await user.save();
+    await user.update({ otp: null, otpExpiry: null });
 
     const token = jwt.sign(
       { id: user.id, email: user.email },

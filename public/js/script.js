@@ -56,7 +56,7 @@ async function verifyOTP() {
     const data = await res.json();
 
     if (data.success) {
-      window.location.href = "/landing";
+      window.location.href = "/";
     } else {
       document.getElementById("msg").innerText = data.message;
     }
@@ -113,6 +113,7 @@ async function passwordLogin() {
 async function startLogin() {
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
+  const otp = document.getElementById("loginOTP").value;
 
   try {
     const res = await fetch("/api/auth/login", {

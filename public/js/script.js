@@ -135,3 +135,17 @@ async function startLogin() {
   }
 }
 
+// function adminLogin(){
+//     const user = document.getElementById("user").value;
+//     const pass = document.getElementById("pass").value;
+//     fetch("/admin/login", {
+//         method: "POST",
+//         headers: {"Content-Type": "application/json"},
+//         body: JSON.stringify({ user, pass })
+//     })
+//     .then(res => res.json())
+//     .then(data => {
+// if (data.success){window.location.href="/admindashboard"} else {document.getElementById("msg").innerText = data.message}});
+
+// }
+

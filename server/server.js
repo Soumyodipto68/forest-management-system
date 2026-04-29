@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import sequelize from "./db.js"; // DB connection
 import path from "path";
 import { fileURLToPath } from "url";
+import open from "open";
 
 // Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -20,6 +21,7 @@ import censusRoutes from "./routes/census.routes.js";
 
 // Import admin middleware
 import isAdmin from "./middleware/admin.middleware.js";
+import { verifyToken } from "./middleware/auth.middleware.js";
 
 dotenv.config();
 
@@ -42,7 +44,7 @@ app.use("/api/census", censusRoutes);
 // ---------------- PAGE ROUTES ----------------
 // Home
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+   res.sendFile(path.join(__dirname,verifyToken, "../public/index.html"));
 });
 
 // Authentication pages
@@ -98,7 +100,10 @@ app.get("/admin-update", isAdmin, (req, res) => {
     console.log(" Models synchronized");
 
     const PORT = process.env.PORT || 8383; // use your chosen port
-    app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+    app.listen(PORT, () => {
+      console.log(`Server running at http://localhost:${PORT}`)
+      open(`http://localhost:${PORT}/login`);
+  });
   } catch (error) {
     console.error(" Database connection failed:", error);
   }

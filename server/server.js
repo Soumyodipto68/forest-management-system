@@ -5,7 +5,6 @@ import dotenv from "dotenv";
 import sequelize from "./db.js"; // DB connection
 import path from "path";
 import { fileURLToPath } from "url";
-import open from "open";
 
 // Resolve __dirname in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -102,7 +101,6 @@ app.get("/admin-update", isAdmin, (req, res) => {
     const PORT = process.env.PORT || 8383; // use your chosen port
     app.listen(PORT, () => {
       console.log(`Server running at http://localhost:${PORT}`)
-      open(`http://localhost:${PORT}/login`);
   });
   } catch (error) {
     console.error(" Database connection failed:", error);
